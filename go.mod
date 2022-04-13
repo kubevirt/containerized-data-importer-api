@@ -1,4 +1,4 @@
-module kubevirt.io/containerized-data-importer-api
+module github.com/kubevirt/containerized-data-importer-api
 
 go 1.17
 
