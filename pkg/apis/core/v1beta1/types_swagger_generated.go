@@ -428,43 +428,12 @@ func (CDISpec) SwaggerDoc() map[string]string {
 		"":                      "CDISpec defines our specification for the CDI installation",
 		"imagePullPolicy":       "+kubebuilder:validation:Enum=Always;IfNotPresent;Never\nPullPolicy describes a policy for if/when to pull a container image",
 		"uninstallStrategy":     "+kubebuilder:validation:Enum=RemoveWorkloads;BlockUninstallIfWorkloadsExist\nCDIUninstallStrategy defines the state to leave CDI on uninstall",
-		"infra":                 "Selectors and tolerations that should apply to cdi infrastructure components",
+		"infra":                 "Rules on which nodes CDI infrastructure pods will be scheduled",
 		"workload":              "Restrict on which nodes CDI workload pods will be scheduled",
 		"cloneStrategyOverride": "Clone strategy override: should we use a host-assisted copy even if snapshots are available?\n+kubebuilder:validation:Enum=\"copy\";\"snapshot\";\"csi-clone\"",
 		"config":                "CDIConfig at CDI level",
 		"certConfig":            "certificate configuration",
 		"priorityClass":         "PriorityClass of the CDI control plane",
-	}
-}
-
-func (ComponentConfig) SwaggerDoc() map[string]string {
-	return map[string]string{
-		"":                    "ComponentConfig defines the scheduling and replicas configuration for CDI components",
-		"deploymentReplicas":  "DeploymentReplicas set Replicas for cdi-deployment",
-		"apiServerReplicas":   "ApiserverReplicas set Replicas for cdi-apiserver",
-		"uploadProxyReplicas": "UploadproxyReplicas set Replicas for cdi-uploadproxy",
-	}
-}
-
-func (CustomizeComponents) SwaggerDoc() map[string]string {
-	return map[string]string{
-		"":        "CustomizeComponents defines patches for components deployed by the CDI operator.",
-		"patches": "+listType=atomic",
-		"flags":   "Configure the value used for deployment and daemonset resources",
-	}
-}
-
-func (Flags) SwaggerDoc() map[string]string {
-	return map[string]string{
-		"": "Flags will create a patch that will replace all flags for the container's\ncommand field. The only flags that will be used are those define. There are no\nguarantees around forward/backward compatibility.  If set incorrectly this will\ncause the resource when rolled out to error until flags are updated.",
-	}
-}
-
-func (CustomizeComponentsPatch) SwaggerDoc() map[string]string {
-	return map[string]string{
-		"":             "CustomizeComponentsPatch defines a patch for some resource.",
-		"resourceName": "+kubebuilder:validation:MinLength=1",
-		"resourceType": "+kubebuilder:validation:MinLength=1",
 	}
 }
 
