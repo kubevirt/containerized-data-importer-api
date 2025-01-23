@@ -79,7 +79,7 @@ type StorageSpec struct {
 	// Resources represents the minimum resources the volume should have.
 	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#resources
 	// +optional
-	Resources corev1.VolumeResourceRequirements `json:"resources,omitempty"`
+	Resources corev1.ResourceRequirements `json:"resources,omitempty"`
 	// VolumeName is the binding reference to the PersistentVolume backing this claim.
 	// +optional
 	VolumeName string `json:"volumeName,omitempty"`
@@ -819,10 +819,6 @@ type CDICertConfig struct {
 	// Server configuration
 	// Certs are rotated and discarded
 	Server *CertConfig `json:"server,omitempty"`
-
-	// Client configuration
-	// Certs are rotated and discarded
-	Client *CertConfig `json:"client,omitempty"`
 }
 
 // CDISpec defines our specification for the CDI installation
@@ -1010,7 +1006,6 @@ type CDIConfigSpec struct {
 	// InsecureRegistries is a list of TLS disabled registries
 	InsecureRegistries []string `json:"insecureRegistries,omitempty"`
 	// DataVolumeTTLSeconds is the time in seconds after DataVolume completion it can be garbage collected. Disabled by default.
-	// Deprecated: Removed in v1.62.
 	// +optional
 	DataVolumeTTLSeconds *int32 `json:"dataVolumeTTLSeconds,omitempty"`
 	// TLSSecurityProfile is used by operators to apply cluster-wide TLS security settings to operands.
@@ -1026,8 +1021,6 @@ type CDIConfigSpec struct {
 type CDIConfigStatus struct {
 	// The calculated upload proxy URL
 	UploadProxyURL *string `json:"uploadProxyURL,omitempty"`
-	// UploadProxyCA is the certificate authority of the upload proxy
-	UploadProxyCA *string `json:"uploadProxyCA,omitempty"`
 	// ImportProxy contains importer pod proxy configuration.
 	// +optional
 	ImportProxy *ImportProxy `json:"importProxy,omitempty"`

@@ -68,11 +68,6 @@ func (in *CDICertConfig) DeepCopyInto(out *CDICertConfig) {
 		*out = new(CertConfig)
 		(*in).DeepCopyInto(*out)
 	}
-	if in.Client != nil {
-		in, out := &in.Client, &out.Client
-		*out = new(CertConfig)
-		(*in).DeepCopyInto(*out)
-	}
 	return
 }
 
@@ -228,11 +223,6 @@ func (in *CDIConfigStatus) DeepCopyInto(out *CDIConfigStatus) {
 	*out = *in
 	if in.UploadProxyURL != nil {
 		in, out := &in.UploadProxyURL, &out.UploadProxyURL
-		*out = new(string)
-		**out = **in
-	}
-	if in.UploadProxyCA != nil {
-		in, out := &in.UploadProxyCA, &out.UploadProxyCA
 		*out = new(string)
 		**out = **in
 	}
