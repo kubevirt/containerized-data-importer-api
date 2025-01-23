@@ -420,7 +420,6 @@ func (CDICertConfig) SwaggerDoc() map[string]string {
 		"":       "CDICertConfig has the CertConfigs for CDI",
 		"ca":     "CA configuration\nCA certs are kept in the CA bundle as long as they are valid",
 		"server": "Server configuration\nCerts are rotated and discarded",
-		"client": "Client configuration\nCerts are rotated and discarded",
 	}
 }
 
@@ -429,43 +428,12 @@ func (CDISpec) SwaggerDoc() map[string]string {
 		"":                      "CDISpec defines our specification for the CDI installation",
 		"imagePullPolicy":       "+kubebuilder:validation:Enum=Always;IfNotPresent;Never\nPullPolicy describes a policy for if/when to pull a container image",
 		"uninstallStrategy":     "+kubebuilder:validation:Enum=RemoveWorkloads;BlockUninstallIfWorkloadsExist\nCDIUninstallStrategy defines the state to leave CDI on uninstall",
-		"infra":                 "Selectors and tolerations that should apply to cdi infrastructure components",
+		"infra":                 "Rules on which nodes CDI infrastructure pods will be scheduled",
 		"workload":              "Restrict on which nodes CDI workload pods will be scheduled",
 		"cloneStrategyOverride": "Clone strategy override: should we use a host-assisted copy even if snapshots are available?\n+kubebuilder:validation:Enum=\"copy\";\"snapshot\";\"csi-clone\"",
 		"config":                "CDIConfig at CDI level",
 		"certConfig":            "certificate configuration",
 		"priorityClass":         "PriorityClass of the CDI control plane",
-	}
-}
-
-func (ComponentConfig) SwaggerDoc() map[string]string {
-	return map[string]string{
-		"":                    "ComponentConfig defines the scheduling and replicas configuration for CDI components",
-		"deploymentReplicas":  "DeploymentReplicas set Replicas for cdi-deployment",
-		"apiServerReplicas":   "ApiserverReplicas set Replicas for cdi-apiserver",
-		"uploadProxyReplicas": "UploadproxyReplicas set Replicas for cdi-uploadproxy",
-	}
-}
-
-func (CustomizeComponents) SwaggerDoc() map[string]string {
-	return map[string]string{
-		"":        "CustomizeComponents defines patches for components deployed by the CDI operator.",
-		"patches": "+listType=atomic",
-		"flags":   "Configure the value used for deployment and daemonset resources",
-	}
-}
-
-func (Flags) SwaggerDoc() map[string]string {
-	return map[string]string{
-		"": "Flags will create a patch that will replace all flags for the container's\ncommand field. The only flags that will be used are those define. There are no\nguarantees around forward/backward compatibility.  If set incorrectly this will\ncause the resource when rolled out to error until flags are updated.",
-	}
-}
-
-func (CustomizeComponentsPatch) SwaggerDoc() map[string]string {
-	return map[string]string{
-		"":             "CustomizeComponentsPatch defines a patch for some resource.",
-		"resourceName": "+kubebuilder:validation:MinLength=1",
-		"resourceType": "+kubebuilder:validation:MinLength=1",
 	}
 }
 
@@ -507,7 +475,7 @@ func (CDIConfigSpec) SwaggerDoc() map[string]string {
 		"filesystemOverhead":       "FilesystemOverhead describes the space reserved for overhead when using Filesystem volumes. A value is between 0 and 1, if not defined it is 0.055 (5.5% overhead)",
 		"preallocation":            "Preallocation controls whether storage for DataVolumes should be allocated in advance.",
 		"insecureRegistries":       "InsecureRegistries is a list of TLS disabled registries",
-		"dataVolumeTTLSeconds":     "DataVolumeTTLSeconds is the time in seconds after DataVolume completion it can be garbage collected. Disabled by default.\nDeprecated: Removed in v1.62.\n+optional",
+		"dataVolumeTTLSeconds":     "DataVolumeTTLSeconds is the time in seconds after DataVolume completion it can be garbage collected. Disabled by default.\n+optional",
 		"tlsSecurityProfile":       "TLSSecurityProfile is used by operators to apply cluster-wide TLS security settings to operands.",
 		"imagePullSecrets":         "The imagePullSecrets used to pull the container images",
 		"logVerbosity":             "LogVerbosity overrides the default verbosity level used to initialize loggers\n+optional",
@@ -518,7 +486,6 @@ func (CDIConfigStatus) SwaggerDoc() map[string]string {
 	return map[string]string{
 		"":                               "CDIConfigStatus provides the most recently observed status of the CDI Config resource",
 		"uploadProxyURL":                 "The calculated upload proxy URL",
-		"uploadProxyCA":                  "UploadProxyCA is the certificate authority of the upload proxy",
 		"importProxy":                    "ImportProxy contains importer pod proxy configuration.\n+optional",
 		"scratchSpaceStorageClass":       "The calculated storage class to be used for scratch space",
 		"defaultPodResourceRequirements": "ResourceRequirements describes the compute resource requirements.",
