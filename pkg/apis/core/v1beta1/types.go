@@ -428,7 +428,6 @@ const DataVolumeCloneSourceSubresource = "source"
 // +kubebuilder:object:root=true
 // +kubebuilder:storageversion
 // +kubebuilder:resource:scope=Cluster
-// +kubebuilder:subresource:status
 type StorageProfile struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
